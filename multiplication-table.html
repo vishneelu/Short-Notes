@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <style>
+        .container{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .multi-table-value-wrapper{
+            padding: 50px 0;
+            display: flex;
+        }
+        .multi-table-value-wrapper input#multi-table-input{
+            min-width: 430px;
+            min-height: 30px;
+            font-size: 16px;
+            line-height: normal;
+            margin-right: 10px;
+        }
+        .multi-table-value-wrapper input#submit{
+            min-height: 35px;
+            border: 0;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+         <form id="table-form">
+            <div class="multi-table-value-wrapper">
+                <input id="multi-table-input" type="text" placeholder="Enter number to generate Multiplication Table">
+                <input id="submit" type="submit" value="Submit">
+            </div>
+         </form>
+        <div id="multi-table-output"></div>
+    </div>
+    <script>
+        var tableForm = document.getElementById("table-form");
+        tableForm.addEventListener("submit", (e) => {
+         e.preventDefault();
+
+         var num = document.getElementById("multi-table-input").value;
+         var tableOutput = document.getElementById("multi-table-output");
+         tableOutput.innerHTML = " ";
+         
+         for(i = 1; i<=10; i++){
+           const node = document.createElement('p');
+           node.appendChild(document.createTextNode(num + "*" + i + "=" + num*i));
+           tableOutput.appendChild(node);  
+        }
+        })
+        
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car colors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <section class="cars-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form>
+                        <select id="car-list">
+                            <option>All</option>
+                            <option>Verna</option>
+                            <option>Nexon</option>
+                            <option>Volvo</option>
+                            <option>Polo</option>
+                            <option>I10</option>
+                        </select>
+                    </form>
+                    <div id="car-colors"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var carColors = [
+            {
+                "id": "All",
+                "color": ""
+            },
+            {
+                "id": "Verna",
+                "color": "red"
+            },
+            {
+                "id": "Nexon",
+                "color": "white"
+            },
+            {
+                "id": "Volvo",
+                "color": "green"
+            },
+            {
+                "id": "Polo",
+                "color": "blue"
+            },
+            {
+                "id": "I10",
+                "color": "grey"
+            }
+        ]
+
+        var carList = document.getElementById('car-list');
+        var carColor = document.getElementById('car-colors');
+
+        carList.addEventListener("change", function () {
+            var selectedCar = carList.options[carList.selectedIndex].textContent;
+
+            var carColorData = carColors.find(function (e) {
+                return e.id === selectedCar;
+            });
+            carColor.textContent = carColorData.color;
+        })
+
+
+    </script>
+</body>
+
+</html>
