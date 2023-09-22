@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lore More </title>
+    <style>
+        .load-more__section{
+            border: 2px dotted #ee5f4a;
+            max-width: 500px;  
+            margin: auto;
+            padding: 3rem;
+        }
+        .grid-view__wrapper {
+            display: block;
+            margin: 10px auto;
+            background: #fff;
+            line-height: 50px;
+            display: none;
+            border: 1px solid #ee5f4a;
+            padding: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .loadMore-main {
+            text-align: center;
+            width: 100%;
+            display: block;
+            color: #fff;
+            margin: 0 auto;
+            line-height: 40px;
+            border-radius: 10px;
+            background: #ee5f4a;
+            opacity: 0.7;
+            margin-top: 2em;
+        }
+
+        a#loadMore {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        a#loadMore:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="load-more__section"> <div class="grid-view__wrapper"> Link 1</div>
+        <div class="grid-view__wrapper"> Link 2</div>
+        <div class="grid-view__wrapper"> Link 3</div>
+        <div class="grid-view__wrapper"> Link 4</div>
+        <div class="grid-view__wrapper"> Link 5</div>
+        <div class="grid-view__wrapper"> Link 6</div>
+        <div class="grid-view__wrapper"> Link 7</div>
+        <div class="grid-view__wrapper"> Link 8</div>
+        <div class="grid-view__wrapper"> Link 9</div>
+        <div class="grid-view__wrapper"> Link 10</div>
+        <div class="grid-view__wrapper"> Link 11</div>
+        <div class="grid-view__wrapper"> Link 12</div>
+        <div class="grid-view__wrapper"> Link 13</div>
+        <div class="grid-view__wrapper"> Link 14</div>
+        <div class="grid-view__wrapper"> Link 15</div>
+        <div class="grid-view__wrapper"> Link 16</div>
+        <div class="grid-view__wrapper"> Link 17</div>
+        <div class="loadMore-main"><a href="#" id="loadMore">Show More</a></div></section>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".grid-view__wrapper").slice(0, 3).show();
+            $("#loadMore").click(function (e) {
+                e.preventDefault();
+                $(".grid-view__wrapper:hidden").slice(0, 3).fadeIn("slow");
+
+                if ($(".grid-view__wrapper:hidden").length == 0) {
+                    $("#loadMore").fadeOut("slow");
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
