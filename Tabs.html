@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Tabs</title>
+    <style>
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dividends-wrapper">
+        <div class="nav-tabs-wrapper">
+            <ul class="nav-tabs">
+                <li class="nav-tab-li active">Item - 1</li>
+                <li class="nav-tab-li">Item - 2</li>
+                <li class="nav-tab-li">Item - 3</li>
+                <li class="nav-tab-li">Item - 4</li>
+                <li class="nav-tab-li">Item - 5</li>
+            </ul>
+        </div>
+        <div class="iframe-body">
+            <div class="tab-content active">content - 1 </div>
+            <div class="tab-content">content - 2 </div>
+            <div class="tab-content">content - 3 </div>
+            <div class="tab-content">content - 4 </div>
+            <div class="tab-content">content - 5 </div>
+        </div>
+    </div>
+</body>
+<script>
+  // desktop view 
+  let tabs = document.querySelector(".dividends-wrapper");
+  let tabHeader = tabs.querySelector(".nav-tabs-wrapper");
+  let tabHeaderElements = tabs.querySelectorAll(".nav-tabs > li");
+  let tabBody = tabs.querySelector(".iframe-body");
+  let tabBodyElements = tabs.querySelectorAll(".iframe-body > div");
+
+  for (let i = 0; i < tabHeaderElements.length; i++) {
+      tabHeaderElements[i].addEventListener("click", function() {
+          tabHeader.querySelector(".active").classList.remove("active");
+          tabHeaderElements[i].classList.add("active");
+          tabBody.querySelector(".active").classList.remove("active");
+          tabBodyElements[i].classList.add("active");
+      })
+  }
+  
+</script>
+</html>
