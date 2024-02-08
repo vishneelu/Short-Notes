@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Pagination Code</title>
+    <style>
+        .main-wrapper {
+            width: 60%;
+            margin: auto;
+        }
+
+        .card-container {
+            column-gap: 15px;
+            margin-top: 4rem
+        }
+
+        .event_card {
+            width: 33.33%;
+            background: #f4f4f4;
+            height: 150px;
+            border: 1px solid #4CAF50;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .pagination-wrapper {
+            margin-top: 2rem;
+        }
+
+        .display-info {
+            font-size: 16px;
+            line-height: 2.4rem;
+            text-align: center;
+        }
+
+        button {
+            padding: 0;
+            background: transparent;
+            border: 0;
+            font-size: 16px;
+            line-height: 24px;
+            padding: 0 3px
+        }
+
+
+        .next-icon {
+            margin-left: 5px
+        }
+
+        .prev-icon {
+            margin-right: 5px
+        }
+
+        .pagination-wrapper button:not(:disabled) {
+            color: balck !important
+        }
+
+        .pagination-wrapper button:disabled {
+            color: green;
+            pointer-events: none
+        }
+
+        @media only screen and (max-width: 992px){
+        .main-wrapper {
+            width: 90%;
+            margin: auto;
+            }
+        }
+     
+    </style>
+</head>
+
+<body>
+    <section class="main-wrapper">
+        <div class="card-container d-flex align-items-center justify-content-center">
+            <card class="event_card" >Item 1</card>
+            <card class="event_card">Item 2</card>
+            <card class="event_card">Item 3</card>
+            <card class="event_card">Item 4</card>
+            <card class="event_card">Item 5</card>
+            <card class="event_card">Item 6</card>
+            <card class="event_card">Item 7</card>
+            <card class="event_card">Item 8</card>
+            <card class="event_card">Item 9</card>
+            <card class="event_card">Item 10</card>
+            <card class="event_card">Item 11</card>
+        </div>
+        <div id="pagination-controls" class="d-flex align-items-center justify-content-center mt-4"></div>
+        <div class="pagination-wrapper pt-60 d-flex align-items-center justify-content-center flex-column-reverse">
+        </div>
+
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const itemsPerPage = 3;
+            let currentPage = 1;
+            const items = document.querySelectorAll('.event_card');
+            const numberOfItems = items.length;
+            const numberOfPages = Math.ceil(numberOfItems / itemsPerPage);
+
+            const paginationControls = document.getElementById('pagination-controls');
+            const displayInfo = document.createElement('div');
+            displayInfo.id = 'display-info';
+            paginationControls.parentNode.insertBefore(displayInfo, paginationControls.nextSibling);
+            displayInfo.classList.add('display-info');
+
+            function updateDisplayInfo() {
+                const startNumber = (currentPage - 1) * itemsPerPage + 1;
+                const endNumber = Math.min(currentPage * itemsPerPage, numberOfItems);
+                displayInfo.textContent = `(Showing ${startNumber} – ${endNumber} of ${numberOfItems})`;
+            }
+
+            function showPage(page) {
+                currentPage = page;
+                const start = (page - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+
+                items.forEach((item, index) => {
+                    item.style.display = 'none';
+                    if (index >= start && index < end) {
+                        item.style.display = '';
+                    }
+                });
+
+                updateDisplayInfo();
+                renderPaginationControls();
+            }
+
+            function renderPaginationControls() {
+                paginationControls.innerHTML = '';
+
+                const prevButton = document.createElement('button');
+                prevButton.textContent = '<';
+                prevButton.classList.add('prev-icon');
+                if (currentPage === 1) prevButton.style.visibility = 'hidden';
+
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) showPage(currentPage - 1);
+                });
+
+                paginationControls.appendChild(prevButton);
+
+                for (let i = 1; i <= numberOfPages; i++) {
+                    const pageButton = document.createElement('button');
+                    pageButton.textContent = i;
+                    if (currentPage === i) pageButton.disabled = true;
+                    pageButton.classList.add('active');
+                    pageButton.addEventListener('click', () => showPage(i));
+                    paginationControls.appendChild(pageButton);
+                }
+
+                // Next button
+                const nextButton = document.createElement('button');
+                nextButton.textContent = '>';
+                nextButton.classList.add('next-icon');
+                if (currentPage === numberOfPages) nextButton.style.visibility = 'hidden';
+
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < numberOfPages) showPage(currentPage + 1);
+                });
+
+                paginationControls.appendChild(nextButton);
+            }
+
+            showPage(1);
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
