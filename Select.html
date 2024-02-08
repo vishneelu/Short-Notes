@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <select id="bio"></select>
+    <div id="details"></div>
+    
+    <script>
+        const bio = document.getElementById("bio");
+        const mydetails = document.getElementById("details");
+
+        const data = {
+            "Name": "Neelu",
+            "LastName": "Vishwakarma",
+            "Age": "23",
+            "Degination": "Frontend Engineer"
+        }
+
+        for (var key in data) {
+            let option = document.createElement("option");
+            let optionText = document.createTextNode(key);
+            option.setAttribute('value', data[key]);
+            option.appendChild(optionText);
+            bio.appendChild(option);
+        }
+
+
+        bio.addEventListener("change", e => {
+            mydetails.innerHTML = e.target.value;
+        })
+    </script>
+
+</body>
+
+</html>
