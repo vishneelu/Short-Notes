@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+.hide { 
+  animation: hide .3s ease 0s 1 normal forwards;
+  transform-origin: center;
+}
+.show { 
+    animation: show .3s ease 0s 1 normal forwards;    
+    transform-origin: center;
+}
+
+@keyframes hide {
+  0%{
+    transform: scale(1);        
+  }
+  100% {
+    transform: scale(0);        
+    width: 0;
+    height: 0;
+    margin: 0;
+  }
+}
+@keyframes show {
+  0%{
+    transform: scale(0);     
+    width: 0;
+    height: 0;
+    margin: 0;   
+  }
+  100% {
+    transform: scale(1);    
+  }
+}
+
+body {
+  font-family: sans-serif;
+}
+.projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30px;
+
+}
+.project {
+  background: rebeccapurple;
+  width: 30px;
+  height: 10px;
+  margin: 20px;
+  padding-top: 20px;
+  text-align: center;  
+  
+  width: 100px;
+  height: 100px;
+}
+.project:nth-child(odd) {
+  background: greenyellow;
+}
+.filters {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+.filter {
+  margin: 20px;
+}
+.filter:hover {
+  cursor: pointer;
+}
+.project {
+    font-size: 10px;
+}
+/* // For decoration only */
+    </style>
+</head>
+<body>
+    <div class="filters">
+        <span class="filter" data-filter="dev">DEV</span>
+        <span class="filter" data-filter="design">DESIGN</span>
+        <span class="filter" data-filter="all">ALL</span>
+    </div>
+    
+    <div class="projects">
+      <div class="project" data-filter="dev">DEV 1</div>
+      <div class="project" data-filter="design">DESIGN 1</div>
+      <div class="project" data-filter="dev">DEV 2</div>
+      <div class="project hide" data-filter="dev">DEV 3</div>
+      <div class="project" data-filter="design">DESIGN 2</div>
+      <div class="project" data-filter="dev">DEV 4</div>
+    </div>
+    
+
+    
+    
+    <script>
+        
+const filters = document.querySelectorAll('.filter');
+
+filters.forEach(filter => { 
+
+  filter.addEventListener('click', function() {
+
+    let selectedFilter = filter.getAttribute('data-filter');
+    let itemsToHide = document.querySelectorAll(`.projects .project:not([data-filter='${selectedFilter}'])`);
+    let itemsToShow = document.querySelectorAll(`.projects [data-filter='${selectedFilter}']`);
+
+    if (selectedFilter == 'all') {
+      itemsToHide = [];
+      itemsToShow = document.querySelectorAll('.projects [data-filter]');
+    }
+
+    itemsToHide.forEach(el => {
+      el.classList.add('hide');
+      el.classList.remove('show');
+    });
+
+    itemsToShow.forEach(el => {
+      el.classList.remove('hide');
+      el.classList.add('show'); 
+    });
+
+  });
+});
+    </script>
+</body>
+
+</html>
